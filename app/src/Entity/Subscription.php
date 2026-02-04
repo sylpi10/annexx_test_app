@@ -26,6 +26,8 @@ class Subscription
     #[ORM\Column]
     private ?\DateTimeImmutable $subscribedAt = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isActive = false;
     public function __construct()
     {
         $this->subscribedAt = new \DateTimeImmutable();
@@ -69,6 +71,17 @@ class Subscription
     {
         $this->subscribedAt = $subscribedAt;
 
+        return $this;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
         return $this;
     }
 }
