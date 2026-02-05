@@ -4,12 +4,12 @@ namespace App\Service\Newsletter;
 
 use App\Entity\Newsletter;
 use App\Entity\Subscription;
-use App\Interface\NewsletterInterface;
+use App\Interface\NewsletterSenderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-final class NewsletterSender implements NewsletterInterface
+final class NewsletterSender implements NewsletterSenderInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $em,

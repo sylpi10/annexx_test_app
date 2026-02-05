@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Interface\NewsletterInterface;
+use App\Interface\NewsletterSenderInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class SendNewsletterCommand extends Command
 {
     public function __construct(
-        protected NewsletterInterface $sender
+        protected NewsletterSenderInterface $sender
     ) {
         parent::__construct();
     }
