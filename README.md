@@ -30,3 +30,8 @@ docker compose up -d
 
 config sur .env ou .env.local : MAILER_DSN=smtp://mailpit:1025
 accéder aux mails http://127.0.0.1:8025/
+
+## envoyer la newsletter:
+```
+docker compose exec php php bin/console app:send-newsletter #id
+```

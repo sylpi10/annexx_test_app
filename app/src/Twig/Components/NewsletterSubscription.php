@@ -65,6 +65,9 @@ final class NewsletterSubscription
     }
 
     #[LiveAction]
+    /**
+     * TODO : refacto
+     */
     public function submit(): void
     {
         $this->success = false;
@@ -172,7 +175,8 @@ final class NewsletterSubscription
     }
 
     /**
-     * verifs ici mais à voir pour faire des Assertions
+     * TODO refacto
+     * premières validations ici mais voir sur entity pour faire des Assertions
      */
     private function parseAndValidateBirthDate(string $raw): ?\DateTimeImmutable
     {

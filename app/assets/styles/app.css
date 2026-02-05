@@ -48,6 +48,7 @@ input{
 input:active, input:focus{
     border: solid 1px #ff8900;
     box-shadow: none;
+    outline: unset;
 }
 .checkbox-label{
     display: flex;
