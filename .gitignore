@@ -6,6 +6,7 @@
 /app/public/bundles/
 /app/var/
 /app/vendor/
+app/public/assets/
 
 # --- Docker / infra ---
 /db_data/

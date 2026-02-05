@@ -55,7 +55,10 @@ input:active, input:focus{
     align-items: center;
     gap: 3px;
 }
-
+.infos-msg{
+    color: #ff8900;
+    margin-top: 10px;
+}
 button{
     background-color: #ff8900;
     color: #000;

@@ -16,13 +16,13 @@
             />
 
             {% if info %}
-                <div>{{ info }}</div>
+                <div class="infos-msg">{{ info }}</div>
             {% endif %}
 
         </div>
 
         <div class="input-wrapper">
-            <strong>Newsletters</strong><br>
+            <strong>Newsletters:</strong><br>
             {% for newsletter in this.newsletters %}
                 <label class="checkbox-label">
                     <input type="checkbox" value="{{ newsletter.id }}" data-model="newsletterIds">
