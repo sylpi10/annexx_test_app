@@ -1,16 +1,4 @@
 <div {{ attributes }}>
-    {% if error %}
-        <div class="msg error">{{ error }}</div>
-    {% endif %}
-    {% if success %}
-        <div class="msg success"> Vous avez bien soucrit aux newsletter :
-            <ul>
-                {% for name in subscribedNewsletterNames %}
-                    <li>{{ name }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
 
     <form data-action="live#action" data-live-action-param="submit" novalidate>
         <div class="input-wrapper">
@@ -46,7 +34,21 @@
         <hr>
 
         <button type="button" data-action="live#action" data-live-action-param="submit">
-            S’abonner</button>
+            S’abonner
+        </button>
 
     </form>
+
+    {% if error %}
+        <div class="msg error">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+        <div class="msg success"> Vous avez bien soucrit aux newsletter :
+            <ul>
+                {% for name in subscribedNewsletterNames %}
+                    <li>{{ name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 </div>

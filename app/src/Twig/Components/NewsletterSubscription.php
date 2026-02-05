@@ -10,13 +10,15 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[AsLiveComponent]
 final class NewsletterSubscription
 {
     use DefaultActionTrait;
 
-    public function __construct(protected EntityManagerInterface $em) {}
+    public function __construct(protected EntityManagerInterface $em, protected MailerInterface $mailer,) {}
 
     #[LiveProp(writable: true)]
     public string $email = '';
@@ -135,6 +137,23 @@ final class NewsletterSubscription
         }
 
         $this->em->flush();
+
+        $subject = $isActive
+            ? 'Confirmation d’inscription aux newsletters'
+            : 'Inscription non validée (moins de 16 ans)';
+
+        $body = $isActive
+            ? "Bonjour,\n\nVotre inscription est confirmée pour :\n- " . implode("\n- ", $this->subscribedNewsletterNames) . "\n\nMerci !"
+            : "Bonjour,\n\nNous avons bien enregistré votre demande pour :\n- " . implode("\n- ", $this->subscribedNewsletterNames) . "\n\nCependant, l’abonnement n’est pas activé car vous avez moins de 16 ans.\n\nMerci !";
+
+        $this->mailer->send(
+            (new Email())
+                ->from('no-reply@annexx.test')
+                ->to($email)
+                ->subject($subject)
+                ->text($body)
+        );
+
 
         if ($isActive) {
             $this->success = true;
