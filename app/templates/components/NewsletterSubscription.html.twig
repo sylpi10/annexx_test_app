@@ -1,0 +1,52 @@
+<div {{ attributes }}>
+    {% if error %}
+        <div class="msg error">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+        <div class="msg success"> Vous avez bien soucrit aux newsletter :
+            <ul>
+                {% for name in subscribedNewsletterNames %}
+                    <li>{{ name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form data-action="live#action" data-live-action-param="submit" novalidate>
+        <div class="input-wrapper">
+            <label>Email</label><br>
+            <input type="email" data-model="email" >
+        </div>
+
+        <div class="input-wrapper">
+            <label>Date de naissance</label><br>
+            <input
+                type="date"
+                data-model="birthDate"
+                data-action="change->live#action"
+                data-live-action-param="validateBirthDate"
+            />
+
+            {% if info %}
+                <div>{{ info }}</div>
+            {% endif %}
+
+        </div>
+
+        <div class="input-wrapper">
+            <strong>Newsletters</strong><br>
+            {% for newsletter in this.newsletters %}
+                <label class="checkbox-label">
+                    <input type="checkbox" value="{{ newsletter.id }}" data-model="newsletterIds">
+                    {{ newsletter.name }}
+                </label>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+        <button type="button" data-action="live#action" data-live-action-param="submit">
+            S’abonner</button>
+
+    </form>
+</div>

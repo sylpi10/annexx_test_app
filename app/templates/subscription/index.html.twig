@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Abonnement{% endblock %}
+
+{% block body %}
+    <div class="newsletter-wrapper">
+        <h1>Abonnement newsletters</h1>
+        <div class="form-wrapper">
+            {{ component('NewsletterSubscription') }}
+        </div>
+    </div>
+
+{% endblock %}
