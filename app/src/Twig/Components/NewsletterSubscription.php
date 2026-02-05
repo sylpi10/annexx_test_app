@@ -2,14 +2,7 @@
 
 namespace App\Twig\Components;
 
-//use App\Entity\Newsletter;
-//use App\Entity\Subscriber;
-//use App\Entity\Subscription;
-//use Doctrine\ORM\EntityManagerInterface;
-//use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
-//use Symfony\Component\Mailer\MailerInterface;
-//use Symfony\Component\Mime\Email;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use App\Service\Newsletter\NewsletterSubscriptionManager;
