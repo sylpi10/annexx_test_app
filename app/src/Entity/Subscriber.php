@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SubscriberRepository::class)]
 class Subscriber
@@ -17,6 +18,12 @@ class Subscriber
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message: 'Email obligatoire.')]
+    #[Assert\Email(message: 'Email invalide.')]
+    #[Assert\Length(
+        max: 180,
+        maxMessage: 'Email trop long.'
+    )]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]

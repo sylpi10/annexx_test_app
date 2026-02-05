@@ -10,12 +10,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class NewsletterSubscriptionManager implements NewsletterSubscriptionInterface
 {
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly MailerInterface $mailer,
+        protected EntityManagerInterface $em,
+        protected MailerInterface $mailer,
+        protected ValidatorInterface $validator,
     ) {}
 
     /**
@@ -100,9 +102,18 @@ final class NewsletterSubscriptionManager implements NewsletterSubscriptionInter
             $names[] = $newsletter->getName();
         }
 
+        $errors = $this->validator->validate($subscriber);
+
+        if (count($errors) > 0) {
+            return new SubscribeResult(
+                success: false,
+                isActive: false,
+                error: (string) $errors[0]->getMessage()
+            );
+        }
+
         $this->em->flush();
 
-        // Mail de confirmation (tu pourras passer en TemplatedEmail après)
         $this->sendConfirmationEmail($email, $names, $isActive);
 
         $info = $isActive
@@ -110,7 +121,7 @@ final class NewsletterSubscriptionManager implements NewsletterSubscriptionInter
             : 'Demande enregistrée, mais abonnement non activé (moins de 16 ans).';
 
         return new SubscribeResult(
-            success: $isActive,        // si tu veux "success=true" même <16, mets true ici
+            success: true,
             isActive: $isActive,
             newsletterNames: $names,
             info: $info

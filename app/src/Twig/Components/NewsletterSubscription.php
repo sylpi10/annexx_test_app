@@ -54,6 +54,11 @@ final class NewsletterSubscription
         $this->info = null;
         $this->subscribedNewsletterNames = [];
 
+        if (strlen($this->email) > 180) {
+            $this->error = 'Email trop long.';
+            return;
+        }
+
         if (!$this->birthDate) {
             $this->error = 'Date de naissance obligatoire.';
             return;
