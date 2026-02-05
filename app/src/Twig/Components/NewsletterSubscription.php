@@ -149,6 +149,9 @@ final class NewsletterSubscription
             ? "Bonjour,\n\nVotre inscription est confirmée pour :\n- " . implode("\n- ", $this->subscribedNewsletterNames) . "\n\nMerci !"
             : "Bonjour,\n\nNous avons bien enregistré votre demande pour :\n- " . implode("\n- ", $this->subscribedNewsletterNames) . "\n\nCependant, l’abonnement n’est pas activé car vous avez moins de 16 ans.\n\nMerci !";
 
+        /**
+         * Possible de passer en TemplatedEmail()
+         */
         $this->mailer->send(
             (new Email())
                 ->from('no-reply@annexx.test')
