@@ -59,11 +59,19 @@ input:active, input:focus{
 button{
     background-color: #ff8900;
     color: #000;
-    border: none;
     border-radius: 4px;
     height: 38px;
     width: 50%;
     min-width: 200px;
     margin: auto;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: ease .4s;
+    border: solid 2px #ff8900;
+}
+button:hover{
+    background-color: transparent;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 

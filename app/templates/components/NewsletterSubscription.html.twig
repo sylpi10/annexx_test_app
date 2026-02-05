@@ -43,7 +43,13 @@
         <div class="msg error">{{ error }}</div>
     {% endif %}
     {% if success %}
-        <div class="msg success"> Vous avez bien soucrit aux newsletter :
+        {% if subscribedNewsletterNames|length < 2 %}
+            {% set msg = "Vous avez bien soucrit à la newsletter" %}
+        {% else %}
+            {% set msg = "Vous avez bien soucrit aux newsletters" %}
+        {% endif %}
+        <div class="msg success">
+            {{ msg }}:
             <ul>
                 {% for name in subscribedNewsletterNames %}
                     <li>{{ name }}</li>
